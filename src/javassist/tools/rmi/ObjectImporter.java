@@ -18,7 +18,7 @@ package javassist.tools.rmi;
 
 import java.io.*;
 import java.net.*;
-import java.applet.Applet;
+//import java.applet.Applet;
 import java.lang.reflect.*;
 
 /**
@@ -88,11 +88,11 @@ public class ObjectImporter implements java.io.Serializable {
      *
      * @param applet    the applet loaded from the <code>Webserver</code>.
      */
-    public ObjectImporter(Applet applet) {
-        URL codebase = applet.getCodeBase();
-        orgServername = servername = codebase.getHost();
-        orgPort = port = codebase.getPort();
-    }
+//    public ObjectImporter(Applet applet) {
+//        URL codebase = applet.getCodeBase();
+//        orgServername = servername = codebase.getHost();
+//        orgPort = port = codebase.getPort();
+//    }
 
     /**
      * Constructs an object importer.
