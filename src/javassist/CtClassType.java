@@ -194,14 +194,16 @@ class CtClassType extends CtClass {
             }
         }
 
-        InputStream fin = null;
+//        InputStream fin = null;
         try {
-            fin = classPool.openClassfile(getName());
-            if (fin == null)
+//            fin = classPool.openClassfile(getName());
+            final ClassFile cf=classPool.getClassFile(getName());
+//            if (fin == null)
+            if(cf==null)
                 throw new NotFoundException(getName());
-
-            fin = new BufferedInputStream(fin);
-            ClassFile cf = new ClassFile(new DataInputStream(fin));
+//
+//            fin = new BufferedInputStream(fin);
+//            ClassFile cf = new ClassFile(new DataInputStream(fin));
             if (!cf.getName().equals(qualifiedName))
                 throw new RuntimeException("cannot find " + qualifiedName + ": " 
                         + cf.getName() + " found in "
@@ -215,13 +217,13 @@ class CtClassType extends CtClass {
         catch (IOException e) {
             throw new RuntimeException(e.toString(), e);
         }
-        finally {
-            if (fin != null)
-                try {
-                    fin.close();
-                }
-                catch (IOException e) {}
-        }
+//        finally {
+//            if (fin != null)
+//                try {
+//                    fin.close();
+//                }
+//                catch (IOException e) {}
+//        }
     }
 
    /* Inherited from CtClass.  Called by get() in ClassPool.
@@ -989,6 +991,7 @@ class CtClassType extends CtClass {
                     return f;
             }
 
+            CtClass aaa=this;
             CtClass s = getSuperclass();
             if (s != null)
                 return s.getField2(name, desc);

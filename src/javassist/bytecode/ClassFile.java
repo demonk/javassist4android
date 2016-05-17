@@ -174,7 +174,7 @@ public final class ClassFile {
         else
             accessFlags = AccessFlag.SUPER;
 
-        initSuperclass(superclass);
+        initSuperclass(classname,superclass);
         interfaces = null;
         fields = new ArrayList();
         methods = new ArrayList();
@@ -185,10 +185,15 @@ public final class ClassFile {
                 getSourcefileName(thisclassname)));
     }
 
-    private void initSuperclass(String superclass) {
+    private void initSuperclass(String classname,String superclass) {
         if (superclass != null) {
             this.superClass = constPool.addClassInfo(superclass);
             cachedSuperclass = superclass;
+        }
+        else if("java.lang.Object".equals(classname)){
+            //针对java.lang.Object作修改，否则会无限递归
+            this.superClass=0;
+            cachedSuperclass=null;
         }
         else {
             this.superClass = constPool.addClassInfo("java.lang.Object");
